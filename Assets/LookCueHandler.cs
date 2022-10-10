@@ -11,10 +11,8 @@ public class LookCueHandler : MonoBehaviour
 
     //settings
     [SerializeField][Range(0, 90)] float _minAngleFromUp;
-    [SerializeField] [Range(90, 180)] float _maxAngleFromUp;
+    [SerializeField][Range(90, 180)] float _maxAngleFromUp;
     [SerializeField] float _defaultAngleFromUp = 90f;
-
-
 
     //state
     float _angle;
@@ -26,6 +24,7 @@ public class LookCueHandler : MonoBehaviour
         _am = GetComponentInParent<ActorMovement>();
         _am.FacingChanged += SetLookCuePositionOnFacingChange;
         _sr = GetComponent<SpriteRenderer>();
+        _sr.color = Color.clear;
     }
 
     private void SetLookCuePositionOnLookChange()
@@ -36,7 +35,7 @@ public class LookCueHandler : MonoBehaviour
         {
             _angle = Mathf.Clamp(_angle, -1 * _maxAngleFromUp, -1 * _minAngleFromUp);
         }
-        else 
+        else
         {
             _angle = Mathf.Clamp(_angle, _minAngleFromUp, _maxAngleFromUp);
         }
@@ -48,7 +47,7 @@ public class LookCueHandler : MonoBehaviour
     }
 
     private void SetLookCuePositionOnFacingChange()
-    {      
+    {
         if (_am.IsFacingRight)
         {
             transform.rotation = Quaternion.Euler(0, 0, -_defaultAngleFromUp);
@@ -59,5 +58,10 @@ public class LookCueHandler : MonoBehaviour
         }
 
         transform.localPosition = transform.rotation * Vector3.up;
+    }
+
+    public void SetLookCueColorOnAttackCharge(float chargeFactor)
+    {
+        _sr.color = Color.Lerp(Color.clear, Color.white, chargeFactor);
     }
 }

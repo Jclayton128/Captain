@@ -25,12 +25,12 @@
                 },
                 {
                     "name": "Fire",
-                    "type": "Button",
+                    "type": "Value",
                     "id": "e4704743-1990-4ee1-93a7-f759a242348b",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
-                    "initialStateCheck": false
+                    "initialStateCheck": true
                 },
                 {
                     "name": "SelectArrow",

@@ -7,8 +7,10 @@ using UnityEngine.InputSystem.UI;
 
 public class ActorDesires : MonoBehaviour
 {
+    public Action DesiredLookChanged;
+    public Action<bool> AttackChargingChanged;
 
-#region References
+    #region References
     PlayerInput _playerInput;
     Camera _camera;
     private void Awake()
@@ -20,28 +22,25 @@ public class ActorDesires : MonoBehaviour
 #endregion
 
 
-    public Action DesiredLookChanged;
-
 #region State
-
-    /// <summary>
-    /// Negative desired move = West, Positive = East.
-    /// </summary>
-    float _desiredMove;
-    Vector2 _rawMove;
-
     [SerializeField] Vector2 _rawLook;
     [SerializeField] Vector2 _mousePos_Raw;
     [SerializeField] Vector2 _mousePos_Relative;
     Ray ray;
     float distance;
     Plane xy = new Plane(Vector3.forward, new Vector3(0, 0, 0));
-
     Vector2 _desiredLook;
-
-    public float DesiredMove => _desiredMove;
     public Vector2 DesiredLook => _desiredLook;
 
+    /// <summary>
+    /// Negative desired move = West, Positive = East.
+    /// </summary>
+    float _desiredMove;
+    Vector2 _rawMove;
+    public float DesiredMove => _desiredMove;
+
+    [SerializeField] bool _isChargingAttack = false;
+    public bool IsChargingAttack => _isChargingAttack;
 
 
 #endregion
@@ -65,8 +64,6 @@ public class ActorDesires : MonoBehaviour
         _rawLook = value.Get<Vector2>();
         if (_playerInput.currentControlScheme == "Keyboard&Mouse")
         {
-            Debug.Log("K&M");
-
             ray = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
             xy.Raycast(ray, out distance);
             _mousePos_Raw = ray.GetPoint(distance);
@@ -79,7 +76,6 @@ public class ActorDesires : MonoBehaviour
 
         if (_playerInput.currentControlScheme == "Gamepad")
         {
-            Debug.Log("Gamepad");
             if (_rawLook.magnitude < Mathf.Epsilon) return;
             else
             {
@@ -90,6 +86,27 @@ public class ActorDesires : MonoBehaviour
 
 
 
+    }
+
+    public void OnFire(InputValue value)
+    {
+        bool currentStatus = _isChargingAttack;
+
+        if (_playerInput.currentControlScheme == "Keyboard&Mouse")
+        {
+            //_isChargingAttack = value.Get<bool>();
+            _isChargingAttack = value.isPressed;
+        }
+
+        if (_playerInput.currentControlScheme == "Gamepad")
+        {
+            _isChargingAttack = value.isPressed;//(value.Get<float>() > .1f) ? true : false;
+        }
+
+        if (currentStatus != _isChargingAttack)
+        {
+            AttackChargingChanged?.Invoke(_isChargingAttack);
+        }
     }
 
 #endregion

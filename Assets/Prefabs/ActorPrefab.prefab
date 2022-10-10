@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 8754095597361072216}
   - component: {fileID: 4564404466705706125}
   - component: {fileID: 1662077683}
+  - component: {fileID: 3134582948977714017}
   m_Layer: 0
   m_Name: ActorPrefab
   m_TagString: Untagged
@@ -198,7 +199,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13fd1e016741141438c35a18d42bc6bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _desiredLook: {x: 0, y: 0}
+  _rawLook: {x: 0, y: 0}
+  _mousePos_Raw: {x: 0, y: 0}
+  _mousePos_Relative: {x: 0, y: 0}
 --- !u!114 &1662077683
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -212,6 +215,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _moveSpeed: 1
+--- !u!114 &3134582948977714017
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3210834147847832729}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2229f0f27b2e7e243a8908ce91e7c0c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5709960299744939247
 GameObject:
   m_ObjectHideFlags: 0
@@ -259,6 +274,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _minAngleFromUp: 30
   _maxAngleFromUp: 150
+  _defaultAngleFromUp: 90
 --- !u!212 &6709409215707848208
 SpriteRenderer:
   m_ObjectHideFlags: 0
