@@ -21,6 +21,7 @@ public class ProjectileController : MonoBehaviour
         else
         {
             pb = _pooledProjectiles.Dequeue();
+            pb.gameObject.SetActive(true);
             pb.transform.parent = null;
             
         }
@@ -30,7 +31,7 @@ public class ProjectileController : MonoBehaviour
 
     public void ReturnProjectile(ProjectileBrain expiredProjectile)
     {
-        expiredProjectile.enabled = false;
+        expiredProjectile.gameObject.SetActive(false);
         _activeProjectiles.Remove(expiredProjectile);
         _pooledProjectiles.Enqueue(expiredProjectile);
     }

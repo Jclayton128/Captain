@@ -59,8 +59,15 @@ public class ProjectileBrain : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.layer == 6)
+        int otherLayer = other.gameObject.layer;
+
+        if (otherLayer == 6)
         {
+            transform.Translate(Vector3.up * _arrowSinkAmount_ground);
+        }
+        if (otherLayer == 8)
+        {
+            transform.parent = other.transform;
             transform.Translate(Vector3.up * _arrowSinkAmount_ground);
         }
 

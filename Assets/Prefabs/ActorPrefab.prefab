@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 4564404466705706125}
   - component: {fileID: 1662077683}
   - component: {fileID: 3134582948977714017}
+  - component: {fileID: 3842600156967552096}
   m_Layer: 0
   m_Name: ActorPrefab
   m_TagString: Untagged
@@ -202,6 +203,7 @@ MonoBehaviour:
   _rawLook: {x: 0, y: 0}
   _mousePos_Raw: {x: 0, y: 0}
   _mousePos_Relative: {x: 0, y: 0}
+  _isChargingAttack: 0
 --- !u!114 &1662077683
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -227,6 +229,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2229f0f27b2e7e243a8908ce91e7c0c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _lookCue: {fileID: 0}
+  _maxDraw: 10
+  _drawRate: 2
+  _minDrawFactorToFire: 0.1
+  _arrowLifetimeMultiplier: 2
+  _arrowSpeedMultiplier: 1
+--- !u!70 &3842600156967552096
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3210834147847832729}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.06710702, y: -0.2951622}
+  m_Size: {x: 0.4157859, y: 1.0973577}
+  m_Direction: 0
 --- !u!1 &5709960299744939247
 GameObject:
   m_ObjectHideFlags: 0
